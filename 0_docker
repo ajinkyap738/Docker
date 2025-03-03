@@ -23,6 +23,8 @@ Docker is extensively used in Continuous Integration (CI) and Continuous Deploym
 Docker commands 
 
 docker version
+docker build
+docker pull
 docker images
 docker ps
 docker ps -a
