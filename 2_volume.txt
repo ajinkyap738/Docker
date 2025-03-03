@@ -1,0 +1,14 @@
+# Create the volume 
+
+docker volume create my-volume
+
+# mount the created volume to container path
+docker run -it --mount source=my-volume,target=/mnt/data ubuntu
+
+========================================================================
+#Create the volume and mount same time
+# docker run -it -v hostpath:containerPath 
+#Host path should be present 
+# container Path 
+
+docker run -it -v ./ajinkya:/app/ container_name ubuntu

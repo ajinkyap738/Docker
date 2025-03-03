@@ -1,0 +1,23 @@
+
+#First approch by manually performing the action
+
+
+docker run -it --name ubuntu ubuntu
+apt update
+apt install iputils -y
+ping google.com -c 1
+exit
+
+===============================================================
+
+#Second approch by creating the image >> then run the respective command (below script working on RHEL)
+
+
+docker build --tag my-ubuntu-image1 -<<EOF 
+FROM ubuntu
+RUN apt update && apt install iputils-ping -y
+EOF
+
+===============================================================
+
+
