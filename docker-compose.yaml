@@ -1,0 +1,17 @@
+version: '3'  # The version of Docker Compose you're using
+
+services:
+  web:
+    image: nginx:latest  # The image to use for the container
+    ports:
+      - "80:80"  # Map port 80 of the container to port 80 on the host machine
+
+  db:
+    image: postgres:latest  # The image for the PostgreSQL database
+    environment:
+      POSTGRES_PASSWORD: example  # Environment variable for DB password
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Mount a volume to persist data
+
+volumes:
+  db_data:  # Define a volume to persist data for the database
