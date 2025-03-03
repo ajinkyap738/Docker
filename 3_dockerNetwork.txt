@@ -1,0 +1,91 @@
+What is Docker Network?
+In Docker, a network is an abstraction that allows containers to communicate
+with each other and with external systems while maintaining isolation. When you 
+run a Docker container, it’s automatically connected to a default network, but 
+Docker also allows you to define custom networks for more complex use cases.
+
+Docker networks facilitate the communication between containers, and 
+also between containers and the outside world, while isolating traffic as needed.
+Each container in a Docker network can communicate with others in the same network 
+but is isolated from containers in other networks (unless explicitly connected).
+
+
+==========================================================
+
+Types of Docker Networks
+
+Docker supports several types of networks. Each type has its own characteristics and is used for different purposes.
+
+1. Bridge Network (default network)
+Use Case: 
+    The default network for containers if you don’t specify a custom network. 
+    It’s ideal for standalone containers or containers that need to communicate with 
+    each other on the same host.
+Characteristics:
+    Containers on the bridge network can communicate with each other using 
+    their container name (hostname) and can access external networks (like the internet) 
+    through the host’s network interface.
+It’s isolated from other Docker hosts and containers on different systems.
+Example:
+
+        docker run -d --name container1 --network bridge ubuntu
+        docker run -d --name container2 --network bridge ubuntu
+ ============================================================================       
+2. Host Network
+Use Case: 
+    This type of network is useful when you want a container to 
+    share the network namespace of the host machine. In this case, 
+    the container can use the host’s IP address.
+Characteristics:
+    Containers in the host network have direct access to the host’s network 
+    interfaces, which is faster but less isolated.
+    Usually used when a container needs to perform operations that 
+    require direct access to the host’s network 
+    (like high-performance applications or network monitoring tools).
+Example:
+
+        docker run -d --name container1 --network host ubuntu
+============================================================================
+3. None Network
+Use Case: 
+    Used when you don’t want the container to be connected to any network. 
+    This can be useful for isolated containers that don't need to communicate with anything else.
+Characteristics:
+    The container has no access to the network and cannot communicate with other containers or
+    the host machine unless explicitly configured.
+Example:
+
+    docker run -d --name container1 --network none ubuntu
+============================================================================
+4. Overlay Network
+Use Case: 
+    Typically used in Docker Swarm or multi-host networking. It enables containers on different Docker 
+    hosts to communicate with each other as if they are on the same local network.
+
+Characteristics:
+
+    The overlay network connects containers across multiple Docker hosts, allowing the 
+    containers to interact with each other as though they are on the same network.
+    Overlay networks are key to enabling the scaling and management of microservices in a 
+    distributed Docker environment.
+    Requires Docker Swarm or Kubernetes to be set up.
+Example:
+
+docker network create --driver overlay my_overlay_network
+============================================================================
+
+5. Macvlan Network
+Use Case: 
+    Allows containers to have their own MAC addresses and appear as physical devices on the network. 
+    This is useful for applications that need to be directly accessible from an external network.
+Characteristics:
+    Each container gets its own IP address and MAC address, making it appear as a physical 
+    machine on the network.
+    Can be used when you need containers to have a unique IP address on the local network.
+Example:
+
+    docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 my_macvlan_ne
+============================================================================
+To Check the k8s Dashboard and all things then use portainer  
+https://portainer.github.io/k8s/charts/portainer/ 
+

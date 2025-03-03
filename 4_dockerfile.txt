@@ -1,0 +1,137 @@
+A Dockerfile is a text file that contains a set of instructions to automatically build a Docker image. 
+It defines the steps that Docker will follow to set up the environment inside the container, including 
+installing software, copying files, setting up environment variables, and specifying commands that
+should be executed when the container is run.
+
+Dockerfile Instructions and Parameters
+Here are some of the common instructions and their parameters used in a Dockerfile:
+
+1. FROM
+        Description: Specifies the base image to start building from.
+        Syntax: FROM <image>:<tag>
+        Example: FROM ubuntu:latest
+        The FROM instruction must be the first instruction in a Dockerfile, and it defines the base image
+        for your container. Every Dockerfile starts with FROM.
+2. RUN
+        Description: Executes a command in a new layer during the image build process. 
+        It is commonly used to install software or configure the environment.
+        Syntax: RUN <command>
+        Example: RUN apt-get update && apt-get install -y python3
+        RUN creates a new layer in the Docker image for each command, and the image will contain 
+        all changes made by that command.
+3. CMD
+        Description: Defines the default command to run when the container starts.
+        Syntax: CMD ["executable", "param1", "param2"] (exec form) or CMD ["param1", "param2"] (shell form).
+        Example:
+        Dockerfile
+        Copy
+        CMD ["python3", "app.py"]
+        Only one CMD can be specified in a Dockerfile. If multiple CMD instructions are used, 
+        the last one will take effect.
+4. ENTRYPOINT
+        Description: Defines the command that will always be executed when the container starts. 
+        It is similar to CMD but it doesn’t get overridden when arguments are provided to docker run.
+        Syntax: ENTRYPOINT ["executable", "param1", "param2"]
+        Example:
+        Dockerfile
+        Copy
+        ENTRYPOINT ["python3", "app.py"]
+        While CMD can provide default arguments, ENTRYPOINT is more rigid and can’t be easily overridden by 
+        arguments passed to docker run.
+5. COPY
+        Description: Copies files or directories from the host machine to the container.
+        Syntax: COPY <src> <dest>
+        Example:
+        Dockerfile
+        Copy
+        COPY . /app
+        Copies the contents of the current directory (.) on the host into the /app directory in the container.
+6. ADD
+        Description: Similar to COPY, but ADD has extra functionality, such as supporting URLs and automatic 
+        extraction of tar archives.
+        Syntax: ADD <src> <dest>
+        Example:
+        Dockerfile
+        Copy
+        ADD https://example.com/file.tar.gz /app/
+        ADD can also handle remote files and unpack tarballs directly into the container.
+7. WORKDIR
+        Description: Sets the working directory for subsequent instructions in the Dockerfile.
+        Syntax: WORKDIR <dir>
+        Example:
+        Dockerfile
+        Copy
+        WORKDIR /app
+        The WORKDIR instruction is similar to cd in a shell. All subsequent RUN, CMD, ENTRYPOINT, COPY, 
+        and ADD commands will be executed in this directory.
+8. EXPOSE
+        Description: Informs Docker that the container listens on the specified network ports at runtime.
+        This is used for documentation and does not actually publish the port.
+        Syntax: EXPOSE <port>
+        Example:
+        Dockerfile
+        Copy
+        EXPOSE 8080
+        This tells Docker that the container will listen on port 8080, but you still need to use -p when running 
+        the container to expose the port outside the container.
+9. ENV
+        Description: Sets an environment variable in the container. These variables can be accessed by processes
+        running inside the container.
+        Syntax: ENV <key>=<value>
+        Example:
+        Dockerfile
+        Copy
+        ENV APP_HOME /app
+        This will set the APP_HOME environment variable inside the container to /app.
+10. VOLUME
+        Description: Creates a mount point and marks it as a volume that can be shared between the host and 
+        the container or between containers.
+        Syntax: VOLUME ["/path/to/dir"]
+        Example:
+        Dockerfile
+        Copy
+        VOLUME ["/data"]
+        This creates a volume at /data where data can be persisted between container runs.
+11. USER
+        Description: Sets the user to use when running the container.
+        Syntax: USER <username>
+        Example:
+        Dockerfile
+        Copy
+        USER appuser
+        This makes sure that any command is run as the appuser inside the container, 
+        instead of the default root user.
+12. LABEL
+        Description: Adds metadata to the Docker image, such as the version, maintainer information, 
+        or any other metadata you might find useful.
+        Syntax: LABEL <key>=<value>
+        Example:
+        Dockerfile
+        Copy
+        LABEL maintainer="yourname@example.com"
+13. ARG
+        Description: Defines a build-time argument that can be passed when building the image. 
+        This allows you to pass parameters that are only available during the image build process (not at runtime).
+        Syntax: ARG <name>[=<default_value>]
+        Example:
+        Dockerfile
+        Copy
+        ARG VERSION=1.0
+        RUN echo "Version: $VERSION"
+        You can pass the VERSION argument when building the image using the --build-arg flag.
+14. STOPSIGNAL
+        Description: Sets the signal to stop the container. This can be used to define the shutdown behavior of 
+        the container.
+        Syntax: STOPSIGNAL <signal>
+        Example:
+        Dockerfile
+        Copy
+        STOPSIGNAL SIGINT
+15. HEALTHCHECK
+        Description: Provides instructions for Docker to check the health of the running container.
+        Syntax: HEALTHCHECK [options] CMD <command>
+        Example:
+        Dockerfile
+        Copy
+        HEALTHCHECK CMD curl --fail http://localhost:8080/ || exit 1
+

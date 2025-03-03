@@ -1,0 +1,8 @@
+FROM alpine
+LABEL name="ajinkya"
+
+RUN apk add vim
+RUN echo "Ajinkya">>/tmp/aj.txt
+
+##How to run the Dockerfile if having different name the by providing the filepath
+## docker build -t ImageName:Tags -f dockerfile.dev .

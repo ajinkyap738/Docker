@@ -1,0 +1,24 @@
+# Use an official Python runtime as a parent image to build the app
+FROM python:3.9-slim as builder
+
+# Set the working directory
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code
+COPY . .
+
+# Now use the distroless base image
+FROM gcr.io/distroless/python3
+
+# Set the working directory in the distroless image
+WORKDIR /app
+
+# Copy the Python app and installed dependencies from the builder image
+COPY --from=builder /app /app
+
+# Set the command to run your application
+CMD ["app.py"]

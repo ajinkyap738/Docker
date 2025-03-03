@@ -1,4 +1,25 @@
+How to run the container (if we stop the container then it still present in backend  )
 
+
+docker run -it -d ubuntu
+
+docker ps
+docker stop 
+docker ps -a # showing the stoped container
+========================================================
+How to remove the stoped container
+
+docker rm $(docker ps -aq)
+
+=========================================================
+How to run the container once stop it will delete from backend 
+
+docker run -it --rm -d ubuntu
+
+docker ps
+docker stop 
+docker ps -a
+==========================================================
 #First approch by manually performing the action
 
 

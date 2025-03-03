@@ -1,0 +1,15 @@
+Distroless" images contain only your application and its runtime dependencies. They do not contain package managers, shells or any other programs you would expect to find in a standard Linux distribution.
+
+Why should I use distroless images?
+Restricting what's in your runtime container to precisely what's necessary for your app is a best practice employed by Google and other tech giants that have used containers in production for many years. It improves the signal to noise of scanners (e.g. CVE) and reduces the burden of establishing provenance to just what you need.
+
+==================================================
+https://github.com/GoogleContainerTools/distroless?tab=readme-ov-file
+
+==================================================
+
+Benefits of Distroless Images:
+        Smaller image size: Only the application and the necessary runtime are included, 
+        which reduces the overall size.Improved security: By excluding unnecessary operating 
+        system components, the attack surface is reduced.
+==================================================
