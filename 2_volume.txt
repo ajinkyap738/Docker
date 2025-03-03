@@ -27,8 +27,8 @@ docker run -it --mount source=my-volume,target=/mnt/data ubuntu
 docker run -it -v ./ajinkya:/app/ container_name ubuntu
 
 ========================================================================
-How to mount the volume path (it will create the folder and volume mount to the path)
-
+#How to mount the volume path (it will create the folder and volume mount to the path)
+# if relative host mount path data updated the container path data auto updatded because of volume mount
 docker run -it --rm --mount type=bind,source="${PWD}"/my-data,destination=/my-data ubuntu
 
 ========================================================================
