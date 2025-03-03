@@ -1,0 +1,32 @@
+Docker is an open-source platform used for developing, shipping, and running applications in isolated environments called containers. 
+
+Containers allow applications and their dependencies (libraries, configurations, etc.) to be packaged into a standardized unit that can run consistently across different environments.
+
+Key concepts in Docker:
+1. Containers: These are lightweight, portable, and isolated environments that package the application and everything it needs to run (code, runtime, libraries, and dependencies).
+
+2. Images: A Docker image is a snapshot of a container, including all its files and settings. It serves as a template to create containers.
+
+3. Docker Engine: This is the runtime that runs and manages Docker containers. It's installed on your machine or server.
+
+4. Dockerfile: A script containing instructions to create a Docker image (e.g., install software, copy files, run commands).
+
+5. Docker Hub: A cloud repository for Docker images, where you can find official images and share your own custom images.
+
+========================================================================
+Why use Docker?
+
+Docker is extensively used in Continuous Integration (CI) and Continuous Deployment (CD) pipelines. It ensures that the application runs in the same container across different stages (development, testing, production) of the pipeline, making the deployment process more predictable and efficient.
+
+========================================================================
+
+Docker commands 
+
+docker version
+docker images
+docker ps
+docker ps -a
+docker run -it --name ajinkya ubuntu
+docker volume ls
+docker network ls
+
