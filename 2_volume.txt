@@ -2,6 +2,19 @@
 
 docker volume create my-volume
 
+========================================================================
+#Check the volume 
+docker volume ls
+========================================================================
+#Check the volume mounted path and more info
+docker volume inspect my-volume
+========================================================================
+#How to delete the volume 
+docker volume rm -f my-volume
+========================================================================
+#Delete he untags/unused volume 
+docker volume prune
+========================================================================
 # mount the created volume to container path
 docker run -it --mount source=my-volume,target=/mnt/data ubuntu
 
@@ -12,3 +25,10 @@ docker run -it --mount source=my-volume,target=/mnt/data ubuntu
 # container Path 
 
 docker run -it -v ./ajinkya:/app/ container_name ubuntu
+
+========================================================================
+How to mount the volume path (it will create the folder and volume mount to the path)
+
+docker run -it --rm --mount type=bind,source="${PWD}"/my-data,destination=/my-data ubuntu
+
+========================================================================
